@@ -1,10 +1,26 @@
-import React from 'react'
-import { View, Text, Image, TouchableOpacity, Dimensions, ScrollView } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, Image, TouchableOpacity, Dimensions, ScrollView, Animated, StyleSheet } from 'react-native'
+import { Divider } from 'react-native-elements'
+import BottomTabBar from '../layouts/BottomTabBar'
 import Cafes from '../layouts/Cafes'
 import SearchBarSecond from '../layouts/SearchBarSecond'
 
 const Restaurants = () => {
     const width = Dimensions.get('window').width
+    const height = Dimensions.get('window').height
+
+    const value = useState(new Animated.Value(0))[0]
+    const [open, setopen] = useState(false)
+
+    const bottomSlider = () => {
+        Animated.spring(value, {
+            toValue: open ? 0 : 350,
+            duration: 1000,
+            useNativeDriver: false
+        }).start(() => setopen(!open))
+
+    }
+
     return (
         <View style={{ flex: 1 }}>
             <View style={{ height: 70, width: width, display: "flex", flexDirection: "row", justifyContent: "space-around", alignItems: "center" }} >
@@ -26,6 +42,29 @@ const Restaurants = () => {
                 <Cafes />
                 <Cafes />
             </ScrollView>
+
+            <View style={{flex:1,justifyContent:"flex-end"}} >
+                 <Animated.View
+                style={{
+                    backgroundColor: "grey",
+                    height:value,
+                    
+                    borderTopLeftRadius: 20,
+                    borderTopRightRadius: 20,
+                    borderWidth: 0
+                }}
+            >
+                    <Text>info slider</Text>
+            </Animated.View>
+            </View>
+           
+
+
+            <Divider width={1} />
+
+
+            <BottomTabBar bottomSlider={bottomSlider} />
+
 
         </View>
     )

@@ -8,8 +8,8 @@ export default function App() {
   return (
     <SafeAreaView   style={styles.container}>
       {/* <LandingPage/>  */}
-      {/* <Restaurants/> */}
-      <CafeDetails/>
+       <Restaurants/> 
+      {/* <CafeDetails/> */}
 
     </SafeAreaView >
   );

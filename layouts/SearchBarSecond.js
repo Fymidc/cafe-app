@@ -5,7 +5,7 @@ import Ionicons from "react-native-vector-icons/Ionicons"
 
 const SearchBarSecond = () => {
     return (
-        <View style={{ marginTop: 10 ,flexDirection:"row"}}>
+        <View style={{marginTop: 10 ,flexDirection:"row"}}>
             <GooglePlacesAutocomplete placeholder="Place.."
                 styles={{
                     textInput: {
@@ -19,7 +19,7 @@ const SearchBarSecond = () => {
                         
                         backgroundColor: "rgba(52, 52, 52, 0.0)",
                         borderRadius: 50,
-                        marginRight: 10,
+                        
                         borderBottomWidth: 1,
                         borderBottomColor:"#696969",
                         flexDirection: "row",
@@ -31,7 +31,7 @@ const SearchBarSecond = () => {
                 textInputProps={{ placeholderTextColor: '#383838' }}
 
                 renderLeftButton={() => (
-                    <View style={{marginLeft:10}} >
+                    <View style={{marginLeft:20}} >
                         <Ionicons color="#383838" name="location-sharp" size={20} />
                     </View>
                 )}
