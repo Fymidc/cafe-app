@@ -4,7 +4,7 @@ import SingleCafe from '../layouts/SingleCafe'
 
 const CafeDetails = () => {
     return (
-        <View style={{flex:1}} >
+        <View style={{flex:1, alignItems: 'center',}} >
             <SingleCafe/>
         </View>
     )

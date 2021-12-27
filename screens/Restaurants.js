@@ -5,25 +5,43 @@ import BottomTabBar from '../layouts/BottomTabBar'
 import Cafes from '../layouts/Cafes'
 import SearchBarSecond from '../layouts/SearchBarSecond'
 
-const Restaurants = () => {
+const Restaurants = ({ navigation }) => {
     const width = Dimensions.get('window').width
     const height = Dimensions.get('window').height
 
     const value = useState(new Animated.Value(0))[0]
     const [open, setopen] = useState(false)
 
-    const bottomSlider = () => {
-        Animated.spring(value, {
-            toValue: open ? 0 : 350,
-            duration: 1000,
-            useNativeDriver: false
-        }).start(() => setopen(!open))
+    // const bottomSlider = () => {
+    //     Animated.spring(value, {
+    //         toValue: open ? 0 : 250,
+    //         duration: 1000,
+    //         useNativeDriver: false
+    //     }).start(() => setopen(!open))
 
+    // }
+
+    const bottomSlider=()=>{
+        if(!open){
+            Animated.spring(value, {
+                toValue: 250,
+                duration: 1000,
+                useNativeDriver: false
+            }).start()
+            setopen(!open)
+        }else{
+            Animated.spring(value, {
+                toValue:-10,
+                duration: 1000,
+                useNativeDriver: false
+            }).start()
+            setopen(!open)
+        }
     }
 
     return (
-        <View style={{ flex: 1 }}>
-            <View style={{ height: 70, width: width, display: "flex", flexDirection: "row", justifyContent: "space-around", alignItems: "center" }} >
+        <View style={{ flex: 1 ,backgroundColor:"#FFFFFF"}}>
+            <View style={{height: 70, width: width, display: "flex", flexDirection: "row", justifyContent: "space-around" ,alignItems:"center"}} >
                 <Text style={{ fontSize: 20, fontWeight: "700" }} >My Place</Text>
                 <TouchableOpacity
                     activeOpacity={.8}
@@ -36,31 +54,50 @@ const Restaurants = () => {
             </View>
 
             <ScrollView  >
-                <Cafes />
+                <Cafes navigation={navigation} />
                 <Cafes />
                 <Cafes />
                 <Cafes />
                 <Cafes />
             </ScrollView>
 
-            <View style={{flex:1,justifyContent:"flex-end"}} >
-                 <Animated.View
-                style={{
-                    backgroundColor: "grey",
-                    height:value,
-                    
-                    borderTopLeftRadius: 20,
-                    borderTopRightRadius: 20,
-                    borderWidth: 0
-                }}
-            >
-                    <Text>info slider</Text>
-            </Animated.View>
+            <View style={{ flex: 1, justifyContent: "flex-end" }} >
+                <Animated.View
+                    style={{
+                        backgroundColor: "#F5F5F5",
+                        
+                        height: value,
+
+                        borderTopLeftRadius: 20,
+                        borderTopRightRadius: 20,
+                        borderWidth: 0
+                    }}
+                >
+                    <View style={{flex:1,justifyContent:"space-around",marginHorizontal:30,marginVertical:15}} >
+
+                        <TouchableOpacity onPress={() => console.log("bastım")} >
+                            <Text>My Profile</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity>
+                            <Text>Comments</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity>
+                            <Text>Favorites</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity>
+                            <Text>Log Out</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                </Animated.View>
             </View>
-           
 
 
-            <Divider width={1} />
+
+            
 
 
             <BottomTabBar bottomSlider={bottomSlider} />
