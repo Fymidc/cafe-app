@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Dimensions, ImageBackground, Pressable, ScrollV
 import Ionicons from "react-native-vector-icons/Ionicons"
 import { Divider } from 'react-native-elements';
 import Comment from './Comment';
-const SingleCafe = () => {
+const SingleCafe = ({route}) => {
 
     const buttonHandler = () => {
         console.log("button")
@@ -24,7 +24,7 @@ const SingleCafe = () => {
 
                 <View style={styles.textcontainer} >
                     <View style={styles.textoverimage} >
-                        <Text style={styles.texts} >Cafe Name</Text>
+                        <Text style={styles.texts} >{route.params.cafename}</Text>
                         <View style={styles.likecontainer} >
                             <Text style={styles.liketext} >10 </Text>
                             <Ionicons onPress={() => console.log("bastım")} color="red" name="heart" size={20} />
@@ -81,27 +81,18 @@ const SingleCafe = () => {
 
 
                 <ScrollView>
-                    <Comment />
-                    <Comment />
-                    <Comment />
-                    <Comment />
-                    <Comment />
-                    <Comment />
-                </ScrollView>
-
 
                 <View style={{
                     flexDirection: "row", height: 50,
                     alignItems: "center",
-                    backgroundColor: "#F8F8F8",
+                    backgroundColor: "white",
                     borderBottomWidth: 1,
-                    borderTopWidth: 1,
-                    borderTopColor: "grey",
+                    
                     paddingLeft: 15,
                 }}>
                     <TextInput
                         style={{
-
+                            
                             flex: 1,
                         }}
                         onChangeText={onChangeText}
@@ -113,6 +104,18 @@ const SingleCafe = () => {
                     <Ionicons style={{marginRight:10}} onPress={() => console.log(text)} color="black" name="send-outline" size={20} />
                 </View>
 
+
+
+                    <Comment />
+                    <Comment />
+                    <Comment />
+                    <Comment />
+                    <Comment />
+                    <Comment />
+                </ScrollView>
+
+
+                
             </KeyboardAvoidingView>
         </View  >
 

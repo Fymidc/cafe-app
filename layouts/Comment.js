@@ -21,8 +21,8 @@ const Comment = () => {
 const styles = StyleSheet.create({
     commentcontainer: {
 
-        borderWidth:1,
-        borderColor:"#F5F5F5",
+        borderBottomWidth:1,
+        borderBottomColor:"#F5F5F5",
         padding: 20,
         margin: 10,
         marginHorizontal:15

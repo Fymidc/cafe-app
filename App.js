@@ -33,9 +33,7 @@ const styles = StyleSheet.create({
 
 
 /**
- * usera tıklanınca çıkan modalı duzenle
- *3.13 de kaldın rn clone vıdyosu
- *  navigation ekle /RESTAURANTS COMPONENTİNED HEDAERİ, AŞAĞIYA AL
- * sayfalar arası veri yolla single cafe page sinde görüntüle
+ *3.16 de kaldın rn clone vıdyosu
+ * 
  * redux ekle
  */

@@ -3,8 +3,9 @@ import { View, Text, ImageBackground, KeyboardAvoidingView, Dimensions } from 'r
 import SearchBar from '../layouts/SearchBar'
 
 
-const LandingPage = () => {
+const LandingPage = ({navigation}) => {
 
+   
     return (
 
         <ImageBackground
@@ -34,7 +35,7 @@ const LandingPage = () => {
                         Have you had your<Text style={{ fontWeight: "bold" }}> coffee</Text> today!
                     </Text>
 
-                    <SearchBar />
+                    <SearchBar navigation={navigation} />
                 </View>
             </KeyboardAvoidingView>
 

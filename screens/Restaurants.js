@@ -5,9 +5,17 @@ import BottomTabBar from '../layouts/BottomTabBar'
 import Cafes from '../layouts/Cafes'
 import SearchBarSecond from '../layouts/SearchBarSecond'
 
-const Restaurants = ({ navigation }) => {
+const Restaurants = ({ navigation,...props }) => {
     const width = Dimensions.get('window').width
     const height = Dimensions.get('window').height
+
+    React.useEffect(()=>{
+        navigation.addListener("beforeRemove",(e)=>{
+            
+            e.preventDefault()
+        })
+    },[])
+
 
     const value = useState(new Animated.Value(0))[0]
     const [open, setopen] = useState(false)

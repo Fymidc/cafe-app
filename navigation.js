@@ -8,15 +8,18 @@ import CafeDetails from "./screens/CafeDetails";
 export default function RootNavigation(){
     const Stack = createStackNavigator();
 
+    
     const screenOptions={
         headerShown:false,
     }
+  
+
 
     return(
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Restaurants" screenOptions={screenOptions} > 
-                <Stack.Screen name="Home" component={LandingPage} />
-                <Stack.Screen name="Restaurants" component={Restaurants} />
+            <Stack.Navigator initialRouteName="Home"   screenOptions={screenOptions} > 
+                <Stack.Screen name="Home"  component={LandingPage}  />
+                <Stack.Screen name="Restaurants" options={{left: null}} component={Restaurants} />
                 <Stack.Screen name="CafeDetails" component={CafeDetails} />
             </Stack.Navigator>
         </NavigationContainer>

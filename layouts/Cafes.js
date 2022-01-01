@@ -1,9 +1,10 @@
 import React from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native'
 
-const Cafes = () => {
+const Cafes = ({navigation}) => {
     return (
-        <TouchableOpacity style={{marginTop:10}}>
+        <TouchableOpacity style={{marginTop:10}} 
+        onPress={()=>navigation.navigate("CafeDetails",{cafename:"Sorehles"})} >
             <View style={styles.container} >
                 <View>
 
