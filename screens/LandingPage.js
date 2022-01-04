@@ -1,11 +1,12 @@
 import React from 'react'
 import { View, Text, ImageBackground, KeyboardAvoidingView, Dimensions } from 'react-native'
+
 import SearchBar from '../layouts/SearchBar'
 
 
 const LandingPage = ({navigation}) => {
 
-   
+    
     return (
 
         <ImageBackground

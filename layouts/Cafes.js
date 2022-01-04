@@ -1,10 +1,21 @@
 import React from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native'
+import { useDispatch } from 'react-redux';
+import { getAllCafes } from '../actions/cafeActions';
 
 const Cafes = ({navigation}) => {
+
+    const dispatch = useDispatch();
+
+    const handleDispatch=()=>{
+        dispatch(getAllCafes())
+        console.log("componentten geldii")
+    }
+   
+
     return (
-        <TouchableOpacity style={{marginTop:10}} 
-        onPress={()=>navigation.navigate("CafeDetails",{cafename:"Sorehles"})} >
+        <TouchableOpacity style={{marginTop:10}}
+        onPress={()=>{handleDispatch();navigation.navigate("CafeDetails",{cafename:"Sorehles"})}} >
             <View style={styles.container} >
                 <View>
 
