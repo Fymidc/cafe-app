@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native'
 import { useDispatch } from 'react-redux';
 import { getAllCafes } from '../actions/cafeActions';
 
-const Cafes = ({navigation}) => {
+const Cafes = ({navigation,...props}) => {
 
     const dispatch = useDispatch();
 
@@ -15,21 +15,22 @@ const Cafes = ({navigation}) => {
 
     return (
         <TouchableOpacity style={{marginTop:10}}
-        onPress={()=>{handleDispatch();navigation.navigate("CafeDetails",{cafename:"Sorehles"})}} >
+        onPress={()=>{handleDispatch();navigation.navigate("CafeDetails",[props.cafe])}} >
             <View style={styles.container} >
                 <View>
 
-                    <Image style={styles.image} alt="av" source={{ uri: "https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png" }} />
+                    <Image style={styles.image} alt="av" source={{ uri: props.cafe.images[0] }} />
                 </View>
 
                 <View style={styles.cafeinfos} >
-                    <Text style={styles.cafename} >Cafe Name</Text>
+                    <Text style={styles.cafename} >{props.cafe.restaurantName}</Text>
                     <Text>10/Review</Text>
-                    <Text>Cafe Info</Text>
+                    <Text>{props.cafe.info}</Text>
 
                 </View>
 
             </View>
+
         </TouchableOpacity>
     )
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, Image, TouchableOpacity, Dimensions, ScrollView, Animated, StyleSheet } from 'react-native'
 import { Divider } from 'react-native-elements'
+import { useSelector } from 'react-redux'
 import BottomTabBar from '../layouts/BottomTabBar'
 import Cafes from '../layouts/Cafes'
 import SearchBarSecond from '../layouts/SearchBarSecond'
@@ -8,6 +9,10 @@ import SearchBarSecond from '../layouts/SearchBarSecond'
 const Restaurants = ({ navigation,...props }) => {
     const width = Dimensions.get('window').width
     const height = Dimensions.get('window').height
+
+    const cafe = useSelector(state => state.cafe)
+
+   // console.log("state den gelen: ",cafe.cafes)
 
     React.useEffect(()=>{
         navigation.addListener("beforeRemove",(e)=>{
@@ -62,11 +67,10 @@ const Restaurants = ({ navigation,...props }) => {
             </View>
 
             <ScrollView  >
-                <Cafes navigation={navigation} />
-                <Cafes />
-                <Cafes />
-                <Cafes />
-                <Cafes />
+                {cafe.cafes.map(cafe=>(
+                    <Cafes key={cafe.id} cafe={cafe} navigation={navigation} />
+                ))}
+                
             </ScrollView>
 
             <View style={{ flex: 1, justifyContent: "flex-end" }} >
