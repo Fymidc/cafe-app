@@ -7,15 +7,24 @@ import Ionicons from "react-native-vector-icons/Ionicons"
 const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
 
-const SignUp = () => {
+const SignUp = ({navigation}) => {
+
+    const handleSignup=()=>{
+        //sign up logic gonna be here 
+        //check if inputs not empty
+        //then it will route tologin page 
+        navigation.navigate("Login")
+
+    }
+
     return (
         <View style={{width:width}} >
 
-            <View style={{ position: "absolute", bottom: 170, width: width, height: height, zIndex: -1 }} >
+            <View style={{ position: "absolute",  width: width, height: height, zIndex: -1 }} >
                 <Image style={{flex:1}} source={{uri:"https://www.teahub.io/photos/full/35-355574_sky-blue-gradient.jpg"}} />
             </View>
 
-            <View style={{ marginHorizontal: 50, justifyContent: "center", backgroundColor: "white", borderTopLeftRadius: 20, borderTopRightRadius: 20 }} >
+            <View style={{ marginHorizontal: 50, marginTop:180,justifyContent: "center", backgroundColor: "white", borderTopLeftRadius: 20, borderTopRightRadius: 20 }} >
                 <Text style={{ paddingVertical: 20, marginHorizontal: 20, fontSize: 25, fontWeight: "700" }} >Sign Up</Text>
                
                 <View style={{flexDirection:"row",alignItems:"center",justifyContent:"center"}} >
@@ -52,7 +61,7 @@ const SignUp = () => {
 
                 <View style={{ marginTop: 25 }} >
                     <Button
-
+                        onPress={()=>handleSignup()}
                         title='Sign-up'
                     />
                 </View>

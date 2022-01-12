@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-
     justifyContent: 'center',
     paddingTop: Platform.OS === "android" ? 25 : 0
   },
@@ -37,8 +36,11 @@ const styles = StyleSheet.create({
 
 /**
  *3.16 de kaldın rn clone vıdyosu
- * login ve regsteri navigasyona ekle 
- * login ve register ol
+ edit ve delete fonksiyonlar haırlandı...
+ comment create ederken json objesi oluştur
+ * Comment /post/delete istekleri yap
+ * Like /post/delete istekleri yap
+ * like için useri reduxa ekle ve like nin usere ait olduğunu doğrula ve post/del işlemi yap
  * jwt tokeni storage ekle ve post ederkken kullan
- * comment get/post istekleri yap
+ * login ve register ol
  */

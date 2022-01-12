@@ -4,6 +4,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import LandingPage from "./screens/LandingPage";
 import Restaurants from "./screens/Restaurants";
 import CafeDetails from "./screens/CafeDetails";
+import Login from "./screens/Login";
+import SignUp from "./screens/SignUp";
+
 import { useDispatch } from "react-redux";
 import { getAllCafes } from "./actions/cafeActions";
 
@@ -28,6 +31,8 @@ export default function RootNavigation() {
 
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Home" screenOptions={screenOptions} >
+                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="Signup" component={SignUp} />
                 <Stack.Screen name="Home" component={LandingPage} />
                 <Stack.Screen name="Restaurants" options={{ left: null }} component={Restaurants} />
                 <Stack.Screen name="CafeDetails" component={CafeDetails} />

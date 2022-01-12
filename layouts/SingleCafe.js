@@ -1,9 +1,9 @@
 import React from 'react'
 import { StyleSheet, View, Text, Dimensions, ImageBackground, Pressable, ScrollView, TextInput, KeyboardAvoidingView, Linking, Platform } from 'react-native'
 import Ionicons from "react-native-vector-icons/Ionicons"
-import { Divider } from 'react-native-elements';
 import { LinearGradient } from "expo-linear-gradient"
 import Comment from './Comment';
+import { useSelector } from 'react-redux';
 const SingleCafe = ({ route }) => {
 
     const buttonHandler = () => {
@@ -11,7 +11,15 @@ const SingleCafe = ({ route }) => {
     }
     const [text, onChangeText] = React.useState("Useless Text");
 
-    console.log("route den gelen: ", route.params.map(cafe => cafe.website))
+    const comments = useSelector(state => state.comment)
+    const likes = useSelector(state => state.like)
+
+   const handleLike=(id)=>{
+       console.log("likeid: ",id)
+   }
+
+    //console.log("route den gelen: ", route.params.map(cafe => cafe.id))
+   // console.log("single cofffe likes: ",likes)
     const address = route.params.map(cafe => cafe.adress);
     const phone = route.params.map(cafe => cafe.telno);
     const website = route.params.map(cafe => cafe.website);
@@ -60,8 +68,8 @@ const SingleCafe = ({ route }) => {
                         <View style={styles.textoverimage} >
                             <Text style={styles.texts} >{cafe.restaurantName}</Text>
                             <View style={styles.likecontainer} >
-                                <Text style={styles.liketext} >10 </Text>
-                                <Ionicons onPress={() => console.log("bastım")} color="red" name="heart" size={20} />
+                                <Text style={styles.liketext} >{likes.likes.length} </Text>
+                                <Ionicons onPress={() => handleLike(likes.likes)} color="red" name="heart" size={20} />
                             </View>
                         </View>
                         <View style={{ top: -145, marginHorizontal: 10, alignItems: "center" }} >
@@ -147,11 +155,9 @@ const SingleCafe = ({ route }) => {
 
 
                     
-                    <Comment />
-                    <Comment />
-                    <Comment />
-                    <Comment />
-                    <Comment />
+                    {comments.comments.length === 0 ? <Text></Text> : comments.comments.map(comment=>(
+                        <Comment key={comment.id} id={comment.id} name={comment.customerName} text={comment.text} />
+                    ))}
                 </ScrollView>
 
 
@@ -200,7 +206,8 @@ const styles = StyleSheet.create({
     likecontainer: {
         flexDirection: "row",
         width: 50,
-        justifyContent: "space-between"
+        justifyContent: "space-around",
+        alignItems:"center"
     },
     button: {
         borderRadius: 20,
