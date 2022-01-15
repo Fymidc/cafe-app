@@ -36,11 +36,11 @@ const styles = StyleSheet.create({
 
 /**
  *3.16 de kaldın rn clone vıdyosu
- edit ve delete fonksiyonlar haırlandı...
+ 
  comment create ederken json objesi oluştur
  * Comment /post/delete istekleri yap
  * Like /post/delete istekleri yap
  * like için useri reduxa ekle ve like nin usere ait olduğunu doğrula ve post/del işlemi yap
  * jwt tokeni storage ekle ve post ederkken kullan
- * login ve register ol
+ * login ve register ol--
  */

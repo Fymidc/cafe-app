@@ -1,43 +1,80 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, View, Text, Dimensions, ImageBackground, Pressable, ScrollView, TextInput, KeyboardAvoidingView, Linking, Platform } from 'react-native'
 import Ionicons from "react-native-vector-icons/Ionicons"
 import { LinearGradient } from "expo-linear-gradient"
 import Comment from './Comment';
-import { useSelector } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { createComment } from '../actions/commentActions';
 const SingleCafe = ({ route }) => {
+
+    const [userid, setuserid] = useState("")
 
     const buttonHandler = () => {
         console.log("button")
     }
-    const [text, onChangeText] = React.useState("Useless Text");
+
+    const dispatch = useDispatch();
+   
+
+    const getData = async () => {
+        try {
+            const value = await AsyncStorage.getItem('currentUser')
+            if (value !== null) {
+                setuserid(value)
+                console.log("userrr id ",value)
+            }
+        } catch (e) {
+            console.log(e.message)
+        }
+    }
+   
+    
+    const [text, onChangeText] = React.useState("");
 
     const comments = useSelector(state => state.comment)
     const likes = useSelector(state => state.like)
 
-   const handleLike=(id)=>{
-       console.log("likeid: ",id)
-   }
+    const handleLike = (id) => {
+        console.log("likeid: ", id)
+    }
+
+    const restaurantid =route.params.map(cafe=>cafe.id)
+    console.log("restaurant id",restaurantid[0])
+
+    const data ={
+        text: text,
+        customerid:userid ,
+        restaurantid:JSON.stringify(restaurantid[0])
+    }
+    getData();
+
+    const handleCommnetCreate = () => {
+       
+        dispatch(createComment(JSON.stringify(data)))
+    }
 
     //console.log("route den gelen: ", route.params.map(cafe => cafe.id))
-   // console.log("single cofffe likes: ",likes)
+    // console.log("single cofffe likes: ",likes)
     const address = route.params.map(cafe => cafe.adress);
     const phone = route.params.map(cafe => cafe.telno);
     const website = route.params.map(cafe => cafe.website);
-   const openGps = (lat, lng) => {
-    //    console.log("haritas")
-    //    var scheme = Platform.OS === 'ios' ? 'maps:' : 'geo:';
-    //    var url = scheme + address;
-    Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${address}`)
-      // Linking.openURL(url);
-      }
+    const openGps = (lat, lng) => {
+        //    console.log("haritas")
+        //    var scheme = Platform.OS === 'ios' ? 'maps:' : 'geo:';
+        //    var url = scheme + address;
+        Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${address}`)
+        // Linking.openURL(url);
+    }
 
-      const openCaller=()=>{
+    const openCaller = () => {
         Linking.openURL(`tel:${phone}`)
-      }
+    }
 
-      const openWebsite=()=>{
+    const openWebsite = () => {
         Linking.openURL(`${website}`)
-      }
+    }
 
 
     return (
@@ -55,9 +92,9 @@ const SingleCafe = ({ route }) => {
 
                     <LinearGradient
 
-                        start={{ x: 0.1, y:1 }}
+                        start={{ x: 0.1, y: 1 }}
                         colors={['#000000', '#00000000']}
-                        end={{x: 0.1, y: 0.4}}
+                        end={{ x: 0.1, y: 0.4 }}
                         style={{ top: 90, height: '100%', width: '100%' }}>
 
 
@@ -89,13 +126,13 @@ const SingleCafe = ({ route }) => {
             <KeyboardAvoidingView
                 keyboardVerticalOffset={-220}
                 behavior={Platform.OS === "ios" ? "padding" : "padding"}
-                style={{ flex: 1, justifyContent: "center", }}
+                style={{ justifyContent: "center", }}
             >
 
                 <View style={{ padding: 5 }} >
 
 
-                    <View style={{ flexDirection: "row", marginTop: 10, justifyContent: "space-around" }} >
+                    <View style={{ flexDirection: "row", marginTop: 20, justifyContent: "space-around" }} >
                         <View style={{ alignItems: "center" }} >
                             <Pressable style={styles.button} onPress={buttonHandler}>
                                 <Ionicons style={{ padding: 10 }} onPress={() => openCaller()} color="black" name="call-outline" size={20} />
@@ -126,43 +163,43 @@ const SingleCafe = ({ route }) => {
 
 
 
-                <ScrollView>
-
-                    <View style={{
-                        flexDirection: "row", height: 50,
-                        alignItems: "center",
-                        backgroundColor: "white",
-                       borderBottomLeftRadius:20,
-                       borderBottomRightRadius:20,
-                        
-                        elevation:3,
-                        paddingLeft: 15,
-                    }}>
-                        <TextInput
-                            style={{
-
-                                flex: 1,
-                            }}
-                            onChangeText={onChangeText}
-                            placeholder="Write a review..."
 
 
-                        />
+                <View style={{
+                    flexDirection: "row", height: 50,
+                    alignItems: "center",
+                    backgroundColor: "white",
+                    borderBottomLeftRadius: 20,
+                    borderBottomRightRadius: 20,
 
-                        <Ionicons style={{ marginRight: 10 }} onPress={() => console.log(text)} color="black" name="send-outline" size={20} />
-                    </View>
+                    elevation: 3,
+                    paddingLeft: 15,
+                }}>
+                    <TextInput
+                        style={{
+
+                            flex: 1,
+                        }}
+                        onChangeText={onChangeText}
+                        placeholder="Write a review..."
 
 
+                    />
 
-                    
-                    {comments.comments.length === 0 ? <Text></Text> : comments.comments.map(comment=>(
-                        <Comment key={comment.id} id={comment.id} name={comment.customerName} text={comment.text} />
-                    ))}
-                </ScrollView>
-
-
-
+                    <Ionicons style={{ marginRight: 20 }} onPress={() => handleCommnetCreate()} color="black" name="send-outline" size={20} />
+                </View>
             </KeyboardAvoidingView>
+
+            <ScrollView>
+
+                {comments.comments.length === 0 ? <Text></Text> : comments.comments.map(comment => (
+                    <Comment key={comment.id} id={comment.id} name={comment.customerName} text={comment.text} />
+                ))}
+            </ScrollView>
+
+
+
+
         </View  >
 
 
@@ -207,7 +244,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         width: 50,
         justifyContent: "space-around",
-        alignItems:"center"
+        alignItems: "center"
     },
     button: {
         borderRadius: 20,

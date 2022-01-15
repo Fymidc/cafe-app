@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity, Dimensions, ScrollView, Animated, 
 import { Divider } from 'react-native-elements'
 import { useSelector } from 'react-redux'
 import Ionicons from "react-native-vector-icons/Ionicons"
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import BottomTabBar from '../layouts/BottomTabBar'
 import Cafes from '../layouts/Cafes'
 import SearchBarSecond from '../layouts/SearchBarSecond'
@@ -11,6 +11,8 @@ import SearchBarSecond from '../layouts/SearchBarSecond'
 const Restaurants = ({ navigation, ...props }) => {
     const width = Dimensions.get('window').width
     const height = Dimensions.get('window').height
+
+
 
     const cafe = useSelector(state => state.cafe)
 
@@ -23,20 +25,38 @@ const Restaurants = ({ navigation, ...props }) => {
         })
     }, [])
 
+    const getData = async () => {
+        try {
+            const value = await AsyncStorage.getItem('tokenKey')
+            if (value !== null) {
+                setuser(value)
+            }
+        } catch (e) {
+            console.log(e.message)
+        }
+    }
+
+   
+ 
 
     const value = useState(new Animated.Value(0))[0]
+    const [user, setuser] = useState(null)
     const [open, setopen] = useState(false)
-    const [loggedin, setloggedin] = useState(false)
 
-    // const bottomSlider = () => {
-    //     Animated.spring(value, {
-    //         toValue: open ? 0 : 250,
-    //         duration: 1000,
-    //         useNativeDriver: false
-    //     }).start(() => setopen(!open))
+    const removeValue = async () => {
+        try {
+            await AsyncStorage.removeItem('tokenKey')
+            await AsyncStorage.removeItem('currentUser')
+            setuser(null)
+        } catch (e) {
+            console.log("removing items ", e.message)
+        }
+        
+    }
 
-    // }
-
+    getData()
+    
+   
     const bottomSlider = () => {
         if (!open) {
             Animated.spring(value, {
@@ -62,7 +82,7 @@ const Restaurants = ({ navigation, ...props }) => {
                 <TouchableOpacity
                     activeOpacity={.8}
                     style={{ shadowOpacity: 1 }} onPress={() => console.log("bastım")} >
-                    {loggedin ? <Ionicons style={{ padding: 10 }} onPress={() => console.log("ikon")} color="black" name="person-outline" size={28} />
+                    {user !== null ? <Ionicons style={{ padding: 10 }} onPress={() => removeValue()} color="black" name="log-out-outline" size={28} />
                         : <Ionicons style={{ padding: 10 }} onPress={() => navigation.navigate("Login")} color="black" name="lock-closed-outline" size={28} />
                     }
 
@@ -73,8 +93,8 @@ const Restaurants = ({ navigation, ...props }) => {
             </View>
 
             <ScrollView >
-                { cafe.cafes.length ===0 ? <Text style={{textAlign:"center",marginVertical:150}} >LOADİNG</Text> : cafe.cafes.map(cafe => (
-                    
+                {cafe.cafes.length === 0 ? <Text style={{ textAlign: "center", marginVertical: 150 }} >LOADİNG</Text> : cafe.cafes.map(cafe => (
+
                     <Cafes key={cafe.id} cafe={cafe} navigation={navigation} />
                 ))}
 

@@ -16,18 +16,18 @@ const Comment = ({ name, text, id }) => {
 
     }
 
-    const editData={
-        text:edittext
+    const editData = {
+        text: edittext
     }
 
-    const handleEdit=()=>{
-        
-        console.log("edited: ",editData)
+    const handleEdit = () => {
+
+        console.log("edited: ", editData)
         seteditmodalvisible(false)
     }
 
-    const handleDelete=(id)=>{
-        console.log("comment id: ",id)
+    const handleDelete = (id) => {
+        console.log("comment id: ", id)
         setmodalvisible(false)
     }
 
@@ -64,7 +64,7 @@ const Comment = ({ name, text, id }) => {
                             </TouchableOpacity>
 
 
-                            <TouchableOpacity style={{ flexDirection: "row", alignItems: "center" }} onPress={()=>handleDelete(id)} >
+                            <TouchableOpacity style={{ flexDirection: "row", alignItems: "center" }} onPress={() => handleDelete(id)} >
                                 <Ionicons style={{ padding: 10 }} color="black" name="trash-outline" size={28} />
                                 <Text style={{ fontSize: 16 }} >Delete</Text>
                             </TouchableOpacity>
@@ -89,7 +89,7 @@ const Comment = ({ name, text, id }) => {
                 onRequestClose={() => { seteditmodalvisible(!editmodalvisible) }}
             >
 
-                <View>
+                <View style={{ flex: 1, marginTop:50, alignItems: "center" }} >
                     <TextInput
                         onChangeText={setedittext}
                         value={edittext}
@@ -108,7 +108,9 @@ const Comment = ({ name, text, id }) => {
                         keyboardType="default"
                     />
 
-                    <TouchableOpacity onPress={()=>handleEdit()} ><Text>Edit</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => handleEdit()} >
+                        <Text style={{ borderWidth: 1, borderRadius:10, marginTop:10,paddingHorizontal: 15 ,paddingVertical:5}} >Edit</Text>
+                    </TouchableOpacity>
 
                 </View>
 

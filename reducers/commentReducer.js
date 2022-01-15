@@ -10,6 +10,12 @@ export default function commentReducer(state=initialState,{type,payload}){
                     comments:payload
                 }
         
+            case 'CREATE_COMMENT':
+                return{
+                    ...state,
+                    comments:[...state.comments,payload]
+                }
+
             default:
                return state;
         }
