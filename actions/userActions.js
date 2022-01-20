@@ -40,7 +40,7 @@ export const loginUser = (val) => async dispatch => {
       storeData()
 
     dispatch({
-        type: "GET_ONE_USER",
+        type: "GET_ONE",
         payload: user.data.userId
     })
 }

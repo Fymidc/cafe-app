@@ -37,10 +37,10 @@ const styles = StyleSheet.create({
 /**
  *3.16 de kaldın rn clone vıdyosu
  
- comment create ederken json objesi oluştur
- * Comment /post/delete istekleri yap
- * Like /post/delete istekleri yap
- * like için useri reduxa ekle ve like nin usere ait olduğunu doğrula ve post/del işlemi yap
- * jwt tokeni storage ekle ve post ederkken kullan
- * login ve register ol--
+ *search et ve sadece yazılan cafeyi renderle
+ * Comment /edit/delete istekleri yap
+ *register sayfasına actiondaki fonksiyonu yaz
+ * login değilse comment barı gösterme kullanıcıya 
+ * zaman varsa user modalındaki linkleri yönet
+ 
  */

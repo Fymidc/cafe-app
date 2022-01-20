@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, Image, TouchableOpacity, Dimensions, ScrollView, Animated, StyleSheet } from 'react-native'
 import { Divider } from 'react-native-elements'
 import { useSelector } from 'react-redux'
@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import BottomTabBar from '../layouts/BottomTabBar'
 import Cafes from '../layouts/Cafes'
 import SearchBarSecond from '../layouts/SearchBarSecond'
+import { useIsFocused } from '@react-navigation/native'
 
 const Restaurants = ({ navigation, ...props }) => {
     const width = Dimensions.get('window').width
@@ -55,6 +56,12 @@ const Restaurants = ({ navigation, ...props }) => {
     }
 
     getData()
+
+    //handle navigation.goback method refresh
+    const isFocused = useIsFocused();
+    useEffect(() => {
+        
+    }, [isFocused])
     
    
     const bottomSlider = () => {

@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
-import { StyleSheet, View, Text, Dimensions, ImageBackground, Pressable, ScrollView, TextInput, KeyboardAvoidingView, Linking, Platform } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { StyleSheet, View, Text, Dimensions, ImageBackground, Pressable, ScrollView, TextInput, KeyboardAvoidingView, Linking, Platform, Alert } from 'react-native'
 import Ionicons from "react-native-vector-icons/Ionicons"
 import { LinearGradient } from "expo-linear-gradient"
 import Comment from './Comment';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useIsFocused } from '@react-navigation/native';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { createComment } from '../actions/commentActions';
-const SingleCafe = ({ route }) => {
+import { createLike, deleteLike, getCustomerLikes } from '../actions/likeActions';
+const SingleCafe = ({ navigation, route }) => {
 
     const [userid, setuserid] = useState("")
 
@@ -16,56 +18,96 @@ const SingleCafe = ({ route }) => {
     }
 
     const dispatch = useDispatch();
-   
+
 
     const getData = async () => {
         try {
             const value = await AsyncStorage.getItem('currentUser')
             if (value !== null) {
                 setuserid(value)
-                console.log("userrr id ",value)
+
+                console.log("userrr id ", value)
             }
         } catch (e) {
             console.log(e.message)
         }
     }
-   
-    
+
+
     const [text, onChangeText] = React.useState("");
 
     const comments = useSelector(state => state.comment)
     const likes = useSelector(state => state.like)
 
-    const handleLike = (id) => {
-        console.log("likeid: ", id)
+
+    const handleLike = () => {
+
+        const [id] = likes.clikes.slice(-1)
+
+        if (userid != "") {
+
+            if (likes.clikes.length === 0) {
+                dispatch(createLike(userid, restaurantid[0]))
+
+            } else {
+                dispatch(deleteLike(id.id))
+            }
+
+        } else {
+
+            Alert.alert(
+                "You Are Not Signed In",
+                "Do you want to use more features? Lets sign in.",
+                [
+                    {
+                        text: "Cancel",
+                        onPress: () => console.log("Cancel Pressed"),
+                        style: "cancel"
+                    },
+                    { text: "Sign me in", onPress: () => navigation.navigate("Login") }
+                ]
+            );
+
+
+        }
     }
 
-    const restaurantid =route.params.map(cafe=>cafe.id)
-    console.log("restaurant id",restaurantid[0])
+    const restaurantid = route.params.map(cafe => cafe.id)
+   
 
-    const data ={
+    const data = {
         text: text,
-        customerid:userid ,
-        restaurantid:JSON.stringify(restaurantid[0])
+        customerid: userid,
+        restaurantid: JSON.stringify(restaurantid[0])
     }
+
+
+    //this for check if page focused to render on goback
+    const isFocused = useIsFocused();
+
+
     getData();
+    useEffect(() => {
+
+        dispatch(getCustomerLikes(userid, restaurantid))
+
+    }, [likes.likes.length, likes.clikes.length, isFocused])
+
+
 
     const handleCommnetCreate = () => {
-       
+
         dispatch(createComment(JSON.stringify(data)))
     }
 
-    //console.log("route den gelen: ", route.params.map(cafe => cafe.id))
-    // console.log("single cofffe likes: ",likes)
+    
     const address = route.params.map(cafe => cafe.adress);
     const phone = route.params.map(cafe => cafe.telno);
     const website = route.params.map(cafe => cafe.website);
     const openGps = (lat, lng) => {
-        //    console.log("haritas")
-        //    var scheme = Platform.OS === 'ios' ? 'maps:' : 'geo:';
-        //    var url = scheme + address;
+        
         Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${address}`)
-        // Linking.openURL(url);
+        
     }
 
     const openCaller = () => {
@@ -106,7 +148,8 @@ const SingleCafe = ({ route }) => {
                             <Text style={styles.texts} >{cafe.restaurantName}</Text>
                             <View style={styles.likecontainer} >
                                 <Text style={styles.liketext} >{likes.likes.length} </Text>
-                                <Ionicons onPress={() => handleLike(likes.likes)} color="red" name="heart" size={20} />
+
+                                <Ionicons onPress={() => handleLike()} color={likes.clikes.find(like => like.customerId == userid) ? "red" : "grey"} name="heart" size={20} />
                             </View>
                         </View>
                         <View style={{ top: -145, marginHorizontal: 10, alignItems: "center" }} >

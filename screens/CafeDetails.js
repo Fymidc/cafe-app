@@ -5,7 +5,7 @@ import { getAllComments } from '../actions/commentActions'
 import { getAllLikes } from '../actions/likeActions'
 import SingleCafe from '../layouts/SingleCafe'
 
-const CafeDetails = ({ route }) => {
+const CafeDetails = ({navigation, route }) => {
     // console.log("route",route)
     const [isInitiated, setisInitiated] = useState(false)
 
@@ -27,7 +27,7 @@ const CafeDetails = ({ route }) => {
 
     return (
         <View style={{ flex: 1, justifyContent:"center", alignItems: 'center', backgroundColor: "white" }} >
-            {isInitiated ? <SingleCafe route={route} /> : <Text >Loading...</Text>}
+            {isInitiated ? <SingleCafe navigation={navigation} route={route} /> : <Text >Loading...</Text>}
 
         </View>
     )
