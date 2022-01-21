@@ -74,16 +74,11 @@ const Login = ({ navigation, route }) => {
             }
             
 
-            // dispatch(loginUser(JSON.stringify(data)))
-            // console.log(data)
-           
         }
         if (isAccepted) {
-            // console.log("e yi yakaladım ",e.message)
+          
             navigation.goBack()
         }  
-        //after login success it will navigate to restaurant page
-
 
     }
 

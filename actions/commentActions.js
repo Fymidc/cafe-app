@@ -19,8 +19,7 @@ export const createComment = (val) => async dispatch => {
     try {
         const value = await AsyncStorage.getItem('tokenKey')
         if (value !== null) {
-            console.log("key",value)
-            console.log("data",val)
+           
             const posts = await axios.post("https://hidden-fjord-84882.herokuapp.com/comment", val, {
                 headers: {
                     "Authorization": value,
@@ -41,3 +40,53 @@ export const createComment = (val) => async dispatch => {
 
 
 }
+
+export const editComment=(val,id)=>async dispatch=>{
+
+    console.log("value",val,"id",id)
+    try {
+        const value = await AsyncStorage.getItem('tokenKey')
+        if (value !== null) {
+           
+            const posts = await axios.put(`https://hidden-fjord-84882.herokuapp.com/comment/${id}`, val, {
+                headers: {
+                    "Authorization": value,
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                }
+            })
+
+            dispatch({
+                type : "EDIT_COMMENT",
+                payload : posts.data
+            })
+        }
+    } catch (e) {
+        console.log(e.message)
+    }
+     
+ }
+ 
+ export const deleteComment=(id)=>async dispatch=>{
+    try {
+        const value = await AsyncStorage.getItem('tokenKey')
+        if (value !== null) {
+           
+            const posts = await axios.delete(`https://hidden-fjord-84882.herokuapp.com/comment/${id}`, {
+                headers: {
+                    "Authorization": value,
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                }
+            })
+
+            dispatch({
+                type : "DELETE_COMMENT",
+                payload : id
+            })
+        }
+    } catch (e) {
+        console.log(e.message)
+    }
+         
+ }

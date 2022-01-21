@@ -39,6 +39,8 @@ const SingleCafe = ({ navigation, route }) => {
     const comments = useSelector(state => state.comment)
     const likes = useSelector(state => state.like)
 
+    console.log(comments.comments)
+    
 
     const handleLike = () => {
 
@@ -88,7 +90,7 @@ const SingleCafe = ({ navigation, route }) => {
 
     getData();
     useEffect(() => {
-
+        
         dispatch(getCustomerLikes(userid, restaurantid))
 
     }, [likes.likes.length, likes.clikes.length, isFocused])
@@ -98,6 +100,7 @@ const SingleCafe = ({ navigation, route }) => {
     const handleCommnetCreate = () => {
 
         dispatch(createComment(JSON.stringify(data)))
+        onChangeText("")
     }
 
     
@@ -208,35 +211,42 @@ const SingleCafe = ({ navigation, route }) => {
 
 
 
-                <View style={{
-                    flexDirection: "row", height: 50,
-                    alignItems: "center",
-                    backgroundColor: "white",
-                    borderBottomLeftRadius: 20,
-                    borderBottomRightRadius: 20,
+                {userid ? 
+                    <View style={{
+                        flexDirection: "row", height: 50,
+                        alignItems: "center",
+                        backgroundColor: "white",
+                        borderBottomLeftRadius: 20,
+                        borderBottomRightRadius: 20,
+    
+                        elevation: 3,
+                        paddingLeft: 15,
+                    }}>
+                        <TextInput
+                            style={{
+    
+                                flex: 1,
+                            }}
+                            value={text}
+                            onChangeText={onChangeText}
+                            placeholder="Write a review..."
+    
+    
+                        />
+    
+                        <Ionicons style={{ marginRight: 20 }} onPress={() => handleCommnetCreate()} color="black" name="send-outline" size={20} />
+                    </View>
+                    
+                    :
 
-                    elevation: 3,
-                    paddingLeft: 15,
-                }}>
-                    <TextInput
-                        style={{
-
-                            flex: 1,
-                        }}
-                        onChangeText={onChangeText}
-                        placeholder="Write a review..."
-
-
-                    />
-
-                    <Ionicons style={{ marginRight: 20 }} onPress={() => handleCommnetCreate()} color="black" name="send-outline" size={20} />
-                </View>
+                    <Text></Text>
+            }
             </KeyboardAvoidingView>
 
             <ScrollView>
 
                 {comments.comments.length === 0 ? <Text></Text> : comments.comments.map(comment => (
-                    <Comment key={comment.id} id={comment.id} name={comment.customerName} text={comment.text} />
+                    <Comment key={comment.id} id={comment.id} uid={userid} cid={comment.customerId} name={comment.customerName ? comment.customerName :""} text={comment.text} />
                 ))}
             </ScrollView>
 
