@@ -18,10 +18,10 @@ const BottomTabBar = (props) => {
     return (
         <View style={{justifyContent:"space-between", flexDirection:"row",margin:10,marginHorizontal:30
         }}>
-            <Ionicons  onPress={()=>handleClick("home")}color={selected==="home"?"black":"grey"} name="home" size={25} />
-            <Ionicons  onPress={()=>handleClick("search")} color={selected==="search"?"black":"grey"} name="search" size={25} />
-            <Ionicons onPress={()=>handleClick("resta")} color={selected==="resta"?"black":"grey"} name="restaurant" size={25} />
-            <Ionicons onPress={()=>handleClick("user")} color={selected==="user"?"black":"grey"}  name="person" size={25} />
+            <Ionicons  onPress={()=>handleClick("home")}color={selected==="home"?"orange":"grey"} name="home" size={25} />
+            <Ionicons  onPress={()=>handleClick("search")} color={selected==="search"?"orange":"grey"} name="search" size={25} />
+            <Ionicons onPress={()=>handleClick("resta")} color={selected==="resta"?"orange":"grey"} name="restaurant" size={25} />
+            <Ionicons onPress={()=>handleClick("user")} color={selected==="user"?"orange":"grey"}  name="person" size={25} />
 
             
         </View>

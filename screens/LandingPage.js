@@ -10,7 +10,7 @@ const LandingPage = ({navigation}) => {
     return (
 
         <ImageBackground
-            source={{ uri: 'https://images.pexels.com/photos/2061770/pexels-photo-2061770.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' }}
+            source={{ uri: 'https://images.pexels.com/photos/4906513/pexels-photo-4906513.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' }}
             style={{
                 position: 'absolute',
                 left: 0,
@@ -19,7 +19,8 @@ const LandingPage = ({navigation}) => {
                 height: Dimensions.get('window').height,
 
             }}
-            blurRadius={15}
+            blurRadius={7}
+
             resizeMode="cover"
         >
 
@@ -29,11 +30,11 @@ const LandingPage = ({navigation}) => {
             <KeyboardAvoidingView /**when click to input it pushes up the content */
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
                 style={{ flex: 1, justifyContent: "center", }}>
-                <View style={{paddingHorizontal:30,marginTop:10 }} >
+                <View style={{paddingHorizontal:30 }} >
 
                     <Text
-                        style={{ color: "white", fontSize: 30, fontWeight: "700",textAlign:"center" }} >
-                        Have you had your<Text style={{ fontWeight: "bold" }}> coffee</Text> today!
+                        style={{ marginBottom:35,color: "white", fontSize: 30, fontWeight: "700",textAlign:"center" }} >
+                        Have you had your<Text style={{ fontWeight: "bold" }}> coffee</Text> today?
                     </Text>
 
                     <SearchBar navigation={navigation} />

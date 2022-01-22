@@ -1,21 +1,22 @@
 import React from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native'
+import { AirbnbRating } from 'react-native-ratings';
 import { useDispatch } from 'react-redux';
 import { getAllCafes } from '../actions/cafeActions';
 
-const Cafes = ({navigation,...props}) => {
+const Cafes = ({ navigation, ...props }) => {
 
     const dispatch = useDispatch();
 
-    const handleDispatch=()=>{
+    const handleDispatch = () => {
         dispatch(getAllCafes())
         console.log("componentten geldii")
     }
-   
+
 
     return (
-        <TouchableOpacity style={{marginTop:10}}
-        onPress={()=>{handleDispatch();navigation.navigate("CafeDetails",[props.cafe])}} >
+        <TouchableOpacity style={{ marginTop: 10 }}
+            onPress={() => { handleDispatch(); navigation.navigate("CafeDetails", [props.cafe]) }} >
             <View style={styles.container} >
                 <View>
 
@@ -24,7 +25,15 @@ const Cafes = ({navigation,...props}) => {
 
                 <View style={styles.cafeinfos} >
                     <Text style={styles.cafename} >{props.cafe.restaurantName}</Text>
-                    <Text>10/Review</Text>
+
+                    <AirbnbRating
+                        count={5}
+                        showRating={false}
+                        isDisabled={true}
+                        defaultRating={4}
+                        size={20}
+                    />
+
                     <Text>{props.cafe.info}</Text>
 
                 </View>
@@ -39,7 +48,7 @@ const Cafes = ({navigation,...props}) => {
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection:'row',
+        flexDirection: 'row',
         marginHorizontal: 10,
         shadowColor: "#000",
         elevation: 1,
@@ -53,13 +62,14 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100
     },
-    cafeinfos:{
-        marginHorizontal:20,
-        justifyContent:"space-around"
+    cafeinfos: {
+        marginHorizontal: 20,
+        justifyContent: "space-around",
+        alignItems: "center"
     },
-    cafename:{
-        fontSize:20,
-        fontWeight:"600",
+    cafename: {
+        fontSize: 20,
+        fontWeight: "600",
     }
 });
 

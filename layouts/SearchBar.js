@@ -11,13 +11,14 @@ const SearchBar = ({navigation}) => {
             <View style={{flexDirection:"row",alignItems:"center",
             borderBottomWidth:1,
             marginHorizontal:15,
-            borderBottomColor:"white",
+            backgroundColor:"#F5F5F5",
+            borderBottomColor:"orange",
             borderRadius:15,
             justifyContent:"center"}} >
                   <Pressable style={{padding:5}} onPress={()=>navigation.navigate("Restaurants")} >
-                      <Text style={{color:"white",fontSize:20,marginLeft:5}} >Let's explore places</Text>
+                      <Text style={{color:"orange", fontWeight:'700',fontSize:20,marginLeft:5}} >Let's explore </Text>
                   </Pressable>
-                  <Ionicons color={"white"} style={{paddingLeft:5,marginRight:5}}  name="send-outline" size={18} />
+                  <Ionicons color={"orange"} style={{paddingLeft:5,marginRight:5}}  name="send-outline" size={18} />
 
                 </View>
         </View>

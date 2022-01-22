@@ -61,9 +61,10 @@ const Restaurants = ({ navigation, ...props }) => {
     const isFocused = useIsFocused();
     useEffect(() => {
         
-    }, [isFocused])
+    }, [isFocused,cafe.cafes.length])
     
-   
+
+  
     const bottomSlider = () => {
         if (!open) {
             Animated.spring(value, {
@@ -85,7 +86,7 @@ const Restaurants = ({ navigation, ...props }) => {
     return (
         <View style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
             <View style={{ height: 70, width: width, display: "flex", flexDirection: "row", justifyContent: "space-around", alignItems: "center" }} >
-                <Text style={{ fontSize: 20, fontWeight: "700" }} >My Place</Text>
+                <Text style={{ fontSize: 25, fontWeight: "700",color:"orange" }} > <Text style={{color:"red"}} >M</Text>y <Text style={{color:"brown"}} >P</Text>lace</Text>
                 <TouchableOpacity
                     activeOpacity={.8}
                     style={{ shadowOpacity: 1 }} onPress={() => console.log("bastım")} >
@@ -100,7 +101,7 @@ const Restaurants = ({ navigation, ...props }) => {
             </View>
 
             <ScrollView >
-                {cafe.cafes.length === 0 ? <Text style={{ textAlign: "center", marginVertical: 150 }} >LOADİNG</Text> : cafe.cafes.map(cafe => (
+                {cafe.cafes.length === 0 ? <Text style={{ textAlign: "center", marginVertical: 150 }} >Cafe not found</Text> : cafe.cafes.map(cafe => (
 
                     <Cafes key={cafe.id} cafe={cafe} navigation={navigation} />
                 ))}

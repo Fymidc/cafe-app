@@ -2,12 +2,26 @@ import React, { useState } from 'react'
 import { View, Text, StyleSheet, TextInput } from 'react-native'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 import Ionicons from "react-native-vector-icons/Ionicons"
+import { useDispatch } from 'react-redux'
+import { getAllCafes, getCafeNameContains } from '../actions/cafeActions'
 
 const SearchBarSecond = () => {
     const [text, settext] = useState("")
 
-   
-    console.log(text)
+
+    const dispatch = useDispatch();
+
+   const handleCafeSearch=()=>{
+    const capitalisedInput = text.toLowerCase().replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase())
+    
+    if(text.length==0){
+        dispatch(getAllCafes())    
+    }else{
+
+        dispatch(getCafeNameContains(capitalisedInput))
+    }
+       
+   }
    
 
     return (
@@ -18,6 +32,7 @@ const SearchBarSecond = () => {
                     <TextInput
                     onChangeText={settext}
                         style={styles.inputs}
+                        onSubmitEditing={()=>handleCafeSearch()}
                         placeholderTextColor={"#B0B0B0"}
                         placeholder="search..."
                         keyboardType="default"

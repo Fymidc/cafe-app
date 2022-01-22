@@ -35,12 +35,12 @@ const styles = StyleSheet.create({
 
 
 /**
- *3.16 de kaldın rn clone vıdyosu
- 
- *search et ve sadece yazılan cafeyi renderle
- * Comment /edit/delete istekleri yap
- *register sayfasına actiondaki fonksiyonu yaz
- * login değilse comment barı gösterme kullanıcıya 
- * zaman varsa user modalındaki linkleri yönet
+
+ * yeni kullanıcı 
+ * rachel
+ * 5669141
+ * 
+ * lily
+ * 5669141
  
  */
