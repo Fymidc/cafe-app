@@ -8,10 +8,6 @@
 **Screenshots of the app :
 
 
-![cafelandingpage](https://user-images.githubusercontent.com/60707082/150653667-f263f3d7-f3ee-4f70-aac3-e28863e57b58.png)
-![allcafes](https://user-images.githubusercontent.com/60707082/150653672-6473cd14-523b-4748-96ea-03938c3b566b.png)
-![singlecafe](https://user-images.githubusercontent.com/60707082/150653675-b6223eb4-2b8f-4c00-8a50-a0e91c18cdcd.png)
-![edit-delete](https://user-images.githubusercontent.com/60707082/150653683-d26c57a9-7b73-4727-bfda-61a80d36a12d.png)
-![loginpage](https://user-images.githubusercontent.com/60707082/150653686-87a727e4-cac7-4520-b6d5-81703ce54b5c.png)
+![cafe1-collage](https://user-images.githubusercontent.com/60707082/150653987-b3c75e92-f9c3-4da3-9f32-55db8ef4d64d.png)
+ ![cafe2-collage](https://user-images.githubusercontent.com/60707082/150653991-5146076f-63cc-40aa-9921-e97b456df4d9.png)
 
- 
